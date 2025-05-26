@@ -13,7 +13,7 @@ use app\http\Controllers\Dashboards_Controller;
 |
 */
 //kkchqiwughpiqwufgiqgfipequgfTEST
-Route::get('/', function () {
+/*Route::get('/', function () {
     return 'Main page';
 });
 
@@ -28,6 +28,7 @@ Route::get('/greet/{name}', function($name){
 Route ::get('/hallo', function(){
     return redirect('/hello');
 });
+*/
 route::get('/dashboards', [Dashboards_Controller::class, 'index']) ->name('dashboards.index');
 route::post('/dashboards/create', [Dashboards_Controller::class, 'create']) ->name('dashboards.create');
 route::get('/dashboards/{id}', [Dashboards_Controller::class, 'detail']) ->name('dashboards.detail');
