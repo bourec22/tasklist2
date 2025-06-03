@@ -1,6 +1,9 @@
+
+# Docker Compose file for a PHP application with MySQL database
+
 services:
   app:
-    image: myapp:latest
+    container_name: task_list_app
     build:
       context: .
       dockerfile: docker/php.Dockerfile
@@ -13,7 +16,8 @@ services:
     depends_on:
       - db
   db:
-    image: mysql:5.7
+    image: mysql:latest
+    container_name: task_list_db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: task_list
@@ -24,8 +28,8 @@ services:
     ports:
       - "3306:3306"
     restart: always   
-  volumes:
+volumes:
     db_data:
-      driver: local
+
 
 
