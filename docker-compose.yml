@@ -1,6 +1,6 @@
 services:
   task_list:
-    container_name: task_list_app
+    container_name: task_list_app 
     build: . 
     ports:
       - "8080:80"

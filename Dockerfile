@@ -1,23 +1,29 @@
-# For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3-slim
+FROM php:8.2-apache
+# Install additional PHP extensions
+RUN apt-get update -y && apt-get install -y \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libicu-dev \
+    libgettextpo-dev \
+    zip \
+    git \
+    unzip
 
-# Keeps Python from generating .pyc files in the container
-ENV PYTHONDONTWRITEBYTECODE=1
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-install gettext intl pdo_mysql gd zip
 
-# Turns off buffering for easier container logging
-ENV PYTHONUNBUFFERED=1
+# Copy Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install pip requirements
-COPY requirements.txt .
-RUN python -m pip install -r requirements.txt
-
-WORKDIR /app
-COPY . /app
-
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-USER appuser
-
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["python", "vendor/mockery/mockery/docs/conf.py"]
+RUN a2enmod rewrite headers
+# Copy custom configuration files
+WORKDIR /var/www/html
+COPY ./app /var/www/html
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
+# Expose port 80
+EXPOSE 80
