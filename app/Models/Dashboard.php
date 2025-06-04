@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dashboard extends Model
 {
-     protected $guarded = ['id', 'name', ];
+     protected $guarded = ['id', 'name' ];
 
     use HasFactory;
 }
