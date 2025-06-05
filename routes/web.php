@@ -34,3 +34,6 @@ route::post('/dashboards/create', [Dashboards_Controller::class, 'create']) ->na
 route::get('/dashboards/{id}', [Dashboards_Controller::class, 'detail']) ->name('dashboards.detail');
 route::put('/dashboards/{id}', [Dashboards_Controller::class,'edit']) ->name('dashboards.edit');
 route::delete('/dashboards/{id}', [Dashboards_Controller::class,'delete'])->name('dashboards.delete');
+route::get('/', function() {
+    return 'hello';
+});
