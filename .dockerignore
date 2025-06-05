@@ -14,9 +14,7 @@ LICENSE
 *.dbmdl
 *.jfm
 *.user
-.env
 charts
-compose*
 secrets.dev.yaml
 values.dev.yaml
 README.md

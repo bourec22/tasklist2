@@ -3,7 +3,7 @@ services:
     container_name: task_list_app 
     build: . 
     ports:
-      - "8080:80"
+      - "8000:80"
    
   task_list_db:
     container_name: task_list_db
