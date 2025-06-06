@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\http\Controllers\Dashboards_Controller;
+use App\Http\Controllers\Dashboards_Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,11 +29,11 @@ Route ::get('/hallo', function(){
     return redirect('/hello');
 });
 */
-route::get('/dashboards', [Dashboards_Controller::class, 'index']) ->name('dashboards.index');
-route::post('/dashboards/create', [Dashboards_Controller::class, 'create']) ->name('dashboards.create');
-route::get('/dashboards/{id}', [Dashboards_Controller::class, 'detail']) ->name('dashboards.detail');
-route::put('/dashboards/{id}', [Dashboards_Controller::class,'edit']) ->name('dashboards.edit');
-route::delete('/dashboards/{id}', [Dashboards_Controller::class,'delete'])->name('dashboards.delete');
-route::get('/', function() {
+Route::get('/dashboards', [Dashboards_Controller::class, 'index'])->name('dashboards.index');
+Route::post('/dashboards/create', [Dashboards_Controller::class, 'create'])->name('dashboards.create');
+Route::get('/dashboards/{id}', [Dashboards_Controller::class, 'detail'])->name('dashboards.detail');
+Route::put('/dashboards/{id}', [Dashboards_Controller::class, 'edit'])->name('dashboards.edit');
+Route::delete('/dashboards/{id}', [Dashboards_Controller::class, 'delete'])->name('dashboards.delete');
+Route::get('/', function() {
     return 'hello';
 });
