@@ -7,23 +7,22 @@ use Illuminate\Http\Request;
 
 class Dashboards_Controller extends Controller
 {
-Public function index(){
+public function index(){
 //route = /dashboard
     return Dashboard::all();
 }
 
-Public function create(){
+public function create(Request $request){
 //route = /dashboard/create
-    dashboard::create([
-        'name' => request('name'),
-        'id' => request('id'),
+    Dashboard::create([
+        'name' => $request-> input('name'),
     ]);
     return response()->json(['message' => 'Dashboard created successfully']);
 }
 
-Public function detail(){
+public function detail($id){
 //route = /dashboard/{id}
-    $dashboard = Dashboard::findOrFail(request('id'));
+    $dashboard = Dashboard::find($id);
     if (!$dashboard) {
         return response()->json(['message' => 'Dashboard not found'], 404);
     }   
@@ -31,23 +30,21 @@ Public function detail(){
     
 }
 
-Public function edit(){
+public function edit(  Request $request, $id) {
 //route = /dashboard/{id}
-    $dashboard = Dashboard::findOrFail(request('id'));
-    if (!$dashboard) {
-        return response()->json(['message' => 'Dashboard not found'], 404);
-    }
-    
-    $dashboard->update([
-        'name' => request('name'),
-        'id' => request('id'),
-    ]);
+        $dashboard = Dashboard::find($id);
+        if (!$dashboard) {
+            return response()->json(['message' => 'Dashboard not found'], 404);
+        }
+        $dashboard->update([
+            'name' => $request->input('name'),
+        ]);
     
     return response()->json(['message' => 'Dashboard updated successfully', 'dashboard' => $dashboard]);
 }
-Public function delete(){
+public function delete($id){
 //route = /dashboard/{id}
-    $dashboard = Dashboard::findOrFail(request('id'));
+    $dashboard = Dashboard::find($id);
     if (!$dashboard) {
         return response()->json(['message' => 'Dashboard not found'], 404);
     }
