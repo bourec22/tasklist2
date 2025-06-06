@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dashboard extends Model
 {
-     protected $guarded = ['id'];
-     protected $fillable = ['name'];
-
     use HasFactory;
+
+    protected $guarded = ['id'];
 }
